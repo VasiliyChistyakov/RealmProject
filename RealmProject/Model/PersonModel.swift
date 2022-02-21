@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct PersonModel {
-    let name: String
-    let surname: String
-    let birthdayDate: String
+class PersonModel: Object {
+    @Persisted var name = ""
+    @Persisted var surname = ""
+    @Persisted var birthdayDate = ""
+    
     
 }

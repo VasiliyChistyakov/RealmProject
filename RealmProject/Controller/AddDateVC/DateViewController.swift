@@ -29,7 +29,7 @@ class DateViewController: UIViewController {
         guard let name = nameTextField.text ,let surname = surnameTextField.text ,let date = dateTextField.text else { return }
         
         if !name.isEmpty && !surname.isEmpty && !date.isEmpty {
-            let person = PersonModel(name: name, surname: surnameTextField.text!, birthdayDate: dateTextField.text!)
+            let person = PersonModel(value: ["\(name)", "\(surname)", "\(date)"])
             compliton?(person)
             navigationController?.popViewController(animated: true)
         }

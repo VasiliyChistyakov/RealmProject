@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
     
-    lazy var rowsToDisplay: [PersonModel] = []
-    var birthdaysPeople: [PersonModel] = []
+    var rowsToDisplay: Results<PersonModel>!
+    var birthdaysPeople: Results<PersonModel>!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -20,10 +21,8 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        birthdaysPeople = [ PersonModel(name: "Василий", surname: "Чистяков", birthdayDate: "15.04.1996"),
-                            PersonModel(name: "Лариса", surname: "Гагуева", birthdayDate: "06.08.1997"),
-                            PersonModel(name: "Никита", surname: "Мелехин", birthdayDate: "02.11.1996")
-            ]
+        birthdaysPeople = realm.objects(PersonModel.self)
+//        print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -38,26 +37,32 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sementedControlAction(_ sender: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0 :
-            rowsToDisplay = birthdaysPeople
-        case 1 :
-            rowsToDisplay = birthdaysPeople.dropLast()
-        default:
-            break
-        }
-        self.tableView.reloadData()
+        
+                switch segmentedControl.selectedSegmentIndex {
+                    
+                case 0 :
+                    rowsToDisplay = birthdaysPeople.sorted(byKeyPath: "name", ascending: true)
+                case 1 :
+                    rowsToDisplay = birthdaysPeople.sorted(byKeyPath: "birthdayDate", ascending: true)
+                        
+                default:
+                    rowsToDisplay = birthdaysPeople.sorted(byKeyPath: "name", ascending: true)
+                }
+        
+                self.tableView.reloadData()
     }
     @IBAction func addToDate(_ sender: Any) {
         performSegue(withIdentifier: "AddToDateVC", sender: nil)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddToDateVC" {
             let vc = segue.destination as! DateViewController
             vc.compliton = { person in
-                self.birthdaysPeople.append(person)
+                try! realm.write({
+                    realm.add(person)
+                })
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -68,7 +73,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowsToDisplay.count
+        return rowsToDisplay?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,7 +81,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.surnameLabel.text = rowsToDisplay[indexPath.row].surname
         cell.nameLabel.text = rowsToDisplay[indexPath.row].name
-        cell.birthdayLabel.text = "\(rowsToDisplay[indexPath.row].birthdayDate)"
+        cell.birthdayLabel.text = rowsToDisplay[indexPath.row].birthdayDate
         
         return cell
     }

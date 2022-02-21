@@ -18,6 +18,7 @@
 		FD6782C127BCFD9100BD8E0C /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6782C027BCFD9100BD8E0C /* DateViewController.swift */; };
 		FD6782C827BD4C2C00BD8E0C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FD6782C727BD4C2C00BD8E0C /* Realm */; };
 		FD6782CA27BD4C2C00BD8E0C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FD6782C927BD4C2C00BD8E0C /* RealmSwift */; };
+		FDFF76DF27BD512300FA86D1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFF76DE27BD512300FA86D1 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FD6782BC27BCF6D900BD8E0C /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		FD6782BE27BCF83F00BD8E0C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		FD6782C027BCFD9100BD8E0C /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		FDFF76DE27BD512300FA86D1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		FD6782C427BCFEF900BD8E0C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FDFF76DE27BD512300FA86D1 /* StorageManager.swift */,
 				FD6782C227BCFEDB00BD8E0C /* MainVc */,
 				FD6782C327BCFEE600BD8E0C /* AddDateVC */,
 			);
@@ -193,6 +196,7 @@
 				FD6782BF27BCF83F00BD8E0C /* TableViewCell.swift in Sources */,
 				FD6782BD27BCF6D900BD8E0C /* PersonModel.swift in Sources */,
 				FD6782AB27BCF46000BD8E0C /* ViewController.swift in Sources */,
+				FDFF76DF27BD512300FA86D1 /* StorageManager.swift in Sources */,
 				FD6782A727BCF46000BD8E0C /* AppDelegate.swift in Sources */,
 				FD6782C127BCFD9100BD8E0C /* DateViewController.swift in Sources */,
 				FD6782A927BCF46000BD8E0C /* SceneDelegate.swift in Sources */,
