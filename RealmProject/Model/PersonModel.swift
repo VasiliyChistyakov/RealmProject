@@ -11,7 +11,7 @@ import RealmSwift
 class PersonModel: Object {
     @Persisted var name = ""
     @Persisted var surname = ""
-    @Persisted var birthdayDate = ""
+    @Persisted var birthdayDate = Date()
     
     
 }

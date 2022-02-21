@@ -9,6 +9,7 @@ import UIKit
 
 class DateViewController: UIViewController {
     
+    let dateFormater = DateFormatter()
     var compliton: ((PersonModel) -> ())?
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -17,7 +18,7 @@ class DateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dateFormater.dateFormat = "dd.MM.yy"
     }
     
     
@@ -27,9 +28,9 @@ class DateViewController: UIViewController {
     
     func getDataAndBack() {
         guard let name = nameTextField.text ,let surname = surnameTextField.text ,let date = dateTextField.text else { return }
-        
         if !name.isEmpty && !surname.isEmpty && !date.isEmpty {
-            let person = PersonModel(value: ["\(name)", "\(surname)", "\(date)"])
+            guard let fetchDate = dateFormater.date(from: date) else { return }
+            let person = PersonModel(value: ["\(name)", "\(surname)", fetchDate])
             compliton?(person)
             navigationController?.popViewController(animated: true)
         }

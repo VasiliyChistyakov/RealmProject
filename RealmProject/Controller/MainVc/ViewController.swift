@@ -81,7 +81,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.surnameLabel.text = rowsToDisplay[indexPath.row].surname
         cell.nameLabel.text = rowsToDisplay[indexPath.row].name
-        cell.birthdayLabel.text = rowsToDisplay[indexPath.row].birthdayDate
+        cell.birthdayLabel.text = "\(rowsToDisplay[indexPath.row].birthdayDate)"
         
         return cell
     }
